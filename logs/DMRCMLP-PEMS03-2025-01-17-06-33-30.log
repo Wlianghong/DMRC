@@ -1,0 +1,223 @@
+PEMS03
+--------- DMRCMLP ---------
+{
+    "num_nodes": 358,
+    "in_steps": 12,
+    "out_steps": 12,
+    "train_size": 0.6,
+    "val_size": 0.2,
+    "time_of_day": true,
+    "day_of_week": true,
+    "lr": 0.001,
+    "weight_decay": 0.0005,
+    "milestones": [
+        20,
+        35,
+        50
+    ],
+    "lr_decay_rate": 0.1,
+    "batch_size": 16,
+    "max_epochs": 120,
+    "early_stop": 20,
+    "use_cl": false,
+    "cl_step_size": 2500,
+    "adaptive_mask": true,
+    "change_mask_ratio": 8,
+    "ratio_decay": 0.5,
+    "ratio_threshold": 0.02,
+    "seed": 93048409,
+    "gpu": [
+        3
+    ],
+    "save": false,
+    "model_args": {
+        "num_nodes": 358,
+        "in_steps": 12,
+        "out_steps": 12,
+        "steps_per_day": 288,
+        "input_dim": 1,
+        "output_dim": 1,
+        "input_embedding_dim": 24,
+        "temporal_embedding_dim": 48,
+        "spatial_embedding_dim": 0,
+        "adaptive_embedding_dim": 72,
+        "add_norm": false,
+        "mask_ratio": 0.15,
+        "use_recon": true,
+        "feed_forward_dim": 256,
+        "num_heads": 4,
+        "num_shared_layers": 2,
+        "num_branch_layers": 2,
+        "dropout": 0.1
+    }
+}
+===============================================================================================
+Layer (type:depth-idx)                        Output Shape              Param #
+===============================================================================================
+DMRCMLP                                       --                        434,604
+├─Linear: 1-1                                 [16, 12, 358, 24]         48
+├─TimeEmbedding: 1-2                          [16, 12, 358, 48]         --
+│    └─Embedding: 2-1                         [16, 12, 358, 24]         6,912
+│    └─Embedding: 2-2                         [16, 12, 358, 24]         168
+├─ModuleList: 1-3                             --                        --
+│    └─STAttnBlock: 2-3                       [16, 12, 358, 144]        --
+│    │    └─SelfAttentionLayer: 3-1           [16, 12, 358, 144]        158,224
+│    │    └─SelfAttentionLayer: 3-2           [16, 12, 358, 144]        158,224
+│    └─STAttnBlock: 2-4                       [16, 12, 358, 144]        --
+│    │    └─SelfAttentionLayer: 3-3           [16, 12, 358, 144]        158,224
+│    │    └─SelfAttentionLayer: 3-4           [16, 12, 358, 144]        158,224
+├─Predictor: 1-4                              [16, 12, 358, 1]          --
+│    └─Linear: 2-5                            [16, 12, 358, 144]        20,880
+│    └─ModuleList: 2-6                        --                        --
+│    │    └─MultiLayerPerceptron: 3-5         [16, 12, 358, 144]        41,760
+│    │    └─MultiLayerPerceptron: 3-6         [16, 12, 358, 144]        41,760
+│    └─Linear: 2-7                            [16, 358, 12]             20,748
+===============================================================================================
+Total params: 1,199,776
+Trainable params: 1,199,776
+Non-trainable params: 0
+Total mult-adds (M): 12.24
+===============================================================================================
+Input size (MB): 0.82
+Forward/backward pass size (MB): 3216.29
+Params size (MB): 3.06
+Estimated Total Size (MB): 3220.18
+===============================================================================================
+Loss: LossFusion
+Saved Model: saved_models/DMRCMLP-PEMS03-2025-01-17-06-33-30.pt
+2025-01-17 06:35:45.393041 Epoch 1, Train Y Loss = 21.53516,  Train X Loss = 16.11172, Val Loss = 17.39725
+2025-01-17 06:38:00.638191 Epoch 2, Train Y Loss = 16.65415,  Train X Loss = 13.04523, Val Loss = 17.03837
+2025-01-17 06:40:15.994696 Epoch 3, Train Y Loss = 15.39595,  Train X Loss = 12.50832, Val Loss = 14.94446
+2025-01-17 06:42:31.399720 Epoch 4, Train Y Loss = 14.96613,  Train X Loss = 11.22637, Val Loss = 14.60806
+2025-01-17 06:44:46.748158 Epoch 5, Train Y Loss = 14.58449,  Train X Loss = 9.25124, Val Loss = 14.14285
+2025-01-17 06:47:02.092436 Epoch 6, Train Y Loss = 14.19115,  Train X Loss = 8.78406, Val Loss = 14.97593
+2025-01-17 06:49:17.365880 Epoch 7, Train Y Loss = 13.96114,  Train X Loss = 8.54560, Val Loss = 14.29042
+2025-01-17 06:51:32.563460 Epoch 8, Train Y Loss = 13.77000,  Train X Loss = 8.40201, Val Loss = 13.79082
+2025-01-17 06:53:47.258504 Epoch 9, Train Y Loss = 13.63563,  Train X Loss = 8.26447, Val Loss = 13.73797
+2025-01-17 06:56:02.400922 Epoch 10, Train Y Loss = 13.44783,  Train X Loss = 8.11316, Val Loss = 13.51704
+2025-01-17 06:58:17.705073 Epoch 11, Train Y Loss = 13.32962,  Train X Loss = 8.05323, Val Loss = 14.03704
+2025-01-17 07:00:33.114427 Epoch 12, Train Y Loss = 13.21855,  Train X Loss = 7.95993, Val Loss = 13.81479
+2025-01-17 07:02:48.632862 Epoch 13, Train Y Loss = 13.13338,  Train X Loss = 7.90358, Val Loss = 13.46122
+2025-01-17 07:05:04.342977 Epoch 14, Train Y Loss = 13.04580,  Train X Loss = 7.85116, Val Loss = 13.63221
+2025-01-17 07:07:20.089528 Epoch 15, Train Y Loss = 12.98848,  Train X Loss = 7.80340, Val Loss = 14.29095
+2025-01-17 07:09:35.694655 Epoch 16, Train Y Loss = 12.90113,  Train X Loss = 7.73552, Val Loss = 13.31267
+2025-01-17 07:11:51.108767 Epoch 17, Train Y Loss = 12.85628,  Train X Loss = 7.69969, Val Loss = 13.44947
+2025-01-17 07:14:06.670982 Epoch 18, Train Y Loss = 12.80788,  Train X Loss = 7.66144, Val Loss = 13.23134
+2025-01-17 07:16:22.032326 Epoch 19, Train Y Loss = 12.71534,  Train X Loss = 7.62172, Val Loss = 13.53159
+2025-01-17 07:18:37.309778 Epoch 20, Train Y Loss = 12.71797,  Train X Loss = 7.58464, Val Loss = 13.15258
+2025-01-17 07:20:52.617701 Epoch 21, Train Y Loss = 12.18291,  Train X Loss = 7.29026, Val Loss = 12.94109
+2025-01-17 07:23:07.836793 Epoch 22, Train Y Loss = 12.11238,  Train X Loss = 7.24166, Val Loss = 12.90295
+2025-01-17 07:25:23.092038 Epoch 23, Train Y Loss = 12.09038,  Train X Loss = 7.21731, Val Loss = 12.87358
+2025-01-17 07:27:38.400722 Epoch 24, Train Y Loss = 12.06649,  Train X Loss = 7.20064, Val Loss = 12.94619
+2025-01-17 07:29:53.633551 Epoch 25, Train Y Loss = 12.05082,  Train X Loss = 7.18888, Val Loss = 12.97632
+2025-01-17 07:32:08.869666 Epoch 26, Train Y Loss = 12.03679,  Train X Loss = 7.17063, Val Loss = 12.92074
+2025-01-17 07:34:24.038865 Epoch 27, Train Y Loss = 12.02194,  Train X Loss = 7.16812, Val Loss = 12.96926
+2025-01-17 07:36:39.240765 Epoch 28, Train Y Loss = 12.00917,  Train X Loss = 7.15451, Val Loss = 12.85499
+2025-01-17 07:38:54.563473 Epoch 29, Train Y Loss = 11.99898,  Train X Loss = 7.14777, Val Loss = 12.92183
+2025-01-17 07:41:09.881616 Epoch 30, Train Y Loss = 11.98755,  Train X Loss = 7.14953, Val Loss = 12.95186
+2025-01-17 07:43:25.189091 Epoch 31, Train Y Loss = 11.97605,  Train X Loss = 7.13382, Val Loss = 12.91010
+2025-01-17 07:45:40.491354 Epoch 32, Train Y Loss = 11.96330,  Train X Loss = 7.12986, Val Loss = 12.98418
+2025-01-17 07:47:55.593975 Epoch 33, Train Y Loss = 11.95481,  Train X Loss = 7.11717, Val Loss = 13.00558
+2025-01-17 07:50:10.685923 Epoch 34, Train Y Loss = 11.94466,  Train X Loss = 7.12112, Val Loss = 12.94079
+2025-01-17 07:52:25.613233 Epoch 35, Train Y Loss = 11.93666,  Train X Loss = 7.11031, Val Loss = 12.86882
+2025-01-17 07:54:40.442173 Epoch 36, Train Y Loss = 11.86922,  Train X Loss = 7.07990, Val Loss = 12.86802
+Change mask ratio: 0.075
+2025-01-17 07:56:52.104549 Epoch 37, Train Y Loss = 11.81418,  Train X Loss = 3.41223, Val Loss = 12.73329
+2025-01-17 07:59:03.741728 Epoch 38, Train Y Loss = 11.80730,  Train X Loss = 3.41111, Val Loss = 12.75629
+2025-01-17 08:01:15.374915 Epoch 39, Train Y Loss = 11.80253,  Train X Loss = 3.40902, Val Loss = 12.74411
+2025-01-17 08:03:26.911488 Epoch 40, Train Y Loss = 11.79953,  Train X Loss = 3.41067, Val Loss = 12.74366
+2025-01-17 08:05:38.473361 Epoch 41, Train Y Loss = 11.79675,  Train X Loss = 3.40705, Val Loss = 12.75016
+2025-01-17 08:07:50.131425 Epoch 42, Train Y Loss = 11.79317,  Train X Loss = 3.40948, Val Loss = 12.75746
+2025-01-17 08:10:01.680615 Epoch 43, Train Y Loss = 11.78949,  Train X Loss = 3.41098, Val Loss = 12.74452
+2025-01-17 08:12:13.250606 Epoch 44, Train Y Loss = 11.78835,  Train X Loss = 3.40851, Val Loss = 12.72384
+2025-01-17 08:14:24.858863 Epoch 45, Train Y Loss = 11.78665,  Train X Loss = 3.40910, Val Loss = 12.74499
+2025-01-17 08:16:36.493171 Epoch 46, Train Y Loss = 11.78434,  Train X Loss = 3.41091, Val Loss = 12.73620
+2025-01-17 08:18:48.093676 Epoch 47, Train Y Loss = 11.78006,  Train X Loss = 3.40691, Val Loss = 12.77535
+2025-01-17 08:20:59.871799 Epoch 48, Train Y Loss = 11.77833,  Train X Loss = 3.40689, Val Loss = 12.76996
+2025-01-17 08:23:11.919022 Epoch 49, Train Y Loss = 11.77610,  Train X Loss = 3.40981, Val Loss = 12.77017
+2025-01-17 08:25:24.050213 Epoch 50, Train Y Loss = 11.77555,  Train X Loss = 3.41323, Val Loss = 12.75176
+2025-01-17 08:27:36.225477 Epoch 51, Train Y Loss = 11.76597,  Train X Loss = 3.40813, Val Loss = 12.75721
+2025-01-17 08:29:48.441172 Epoch 52, Train Y Loss = 11.76500,  Train X Loss = 3.41047, Val Loss = 12.75595
+Change mask ratio: 0.0375
+2025-01-17 08:31:59.021256 Epoch 53, Train Y Loss = 11.74322,  Train X Loss = 1.67480, Val Loss = 12.71838
+2025-01-17 08:34:09.704197 Epoch 54, Train Y Loss = 11.74197,  Train X Loss = 1.67826, Val Loss = 12.71203
+2025-01-17 08:36:20.452097 Epoch 55, Train Y Loss = 11.74128,  Train X Loss = 1.67107, Val Loss = 12.70909
+2025-01-17 08:38:31.249367 Epoch 56, Train Y Loss = 11.74072,  Train X Loss = 1.67765, Val Loss = 12.69999
+2025-01-17 08:40:41.957013 Epoch 57, Train Y Loss = 11.74083,  Train X Loss = 1.67783, Val Loss = 12.70841
+2025-01-17 08:42:52.597230 Epoch 58, Train Y Loss = 11.73888,  Train X Loss = 1.67454, Val Loss = 12.70664
+2025-01-17 08:45:03.304169 Epoch 59, Train Y Loss = 11.73947,  Train X Loss = 1.67575, Val Loss = 12.71272
+2025-01-17 08:47:13.979608 Epoch 60, Train Y Loss = 11.73840,  Train X Loss = 1.67688, Val Loss = 12.70315
+2025-01-17 08:49:24.548648 Epoch 61, Train Y Loss = 11.73794,  Train X Loss = 1.67596, Val Loss = 12.70714
+2025-01-17 08:51:35.180213 Epoch 62, Train Y Loss = 11.73831,  Train X Loss = 1.67510, Val Loss = 12.70418
+2025-01-17 08:53:45.678003 Epoch 63, Train Y Loss = 11.73741,  Train X Loss = 1.67398, Val Loss = 12.70844
+2025-01-17 08:55:56.167114 Epoch 64, Train Y Loss = 11.73674,  Train X Loss = 1.67912, Val Loss = 12.70985
+Change mask ratio: 0.0
+2025-01-17 08:57:46.239642 Epoch 65, Train Y Loss = 11.71932,  Train X Loss = 0.00000, Val Loss = 12.67860
+2025-01-17 08:59:36.296009 Epoch 66, Train Y Loss = 11.71582,  Train X Loss = 0.00000, Val Loss = 12.67826
+2025-01-17 09:01:26.468044 Epoch 67, Train Y Loss = 11.71486,  Train X Loss = 0.00000, Val Loss = 12.67376
+2025-01-17 09:03:16.628318 Epoch 68, Train Y Loss = 11.71502,  Train X Loss = 0.00000, Val Loss = 12.67419
+2025-01-17 09:05:06.746971 Epoch 69, Train Y Loss = 11.71207,  Train X Loss = 0.00000, Val Loss = 12.67282
+2025-01-17 09:06:56.768697 Epoch 70, Train Y Loss = 11.71194,  Train X Loss = 0.00000, Val Loss = 12.67404
+2025-01-17 09:08:46.846392 Epoch 71, Train Y Loss = 11.71142,  Train X Loss = 0.00000, Val Loss = 12.67600
+2025-01-17 09:10:36.893253 Epoch 72, Train Y Loss = 11.71015,  Train X Loss = 0.00000, Val Loss = 12.66979
+2025-01-17 09:12:26.926856 Epoch 73, Train Y Loss = 11.70955,  Train X Loss = 0.00000, Val Loss = 12.67301
+2025-01-17 09:14:16.928259 Epoch 74, Train Y Loss = 11.70878,  Train X Loss = 0.00000, Val Loss = 12.66708
+2025-01-17 09:16:06.950731 Epoch 75, Train Y Loss = 11.70787,  Train X Loss = 0.00000, Val Loss = 12.66917
+2025-01-17 09:17:56.935692 Epoch 76, Train Y Loss = 11.70706,  Train X Loss = 0.00000, Val Loss = 12.67790
+2025-01-17 09:19:46.869677 Epoch 77, Train Y Loss = 11.70552,  Train X Loss = 0.00000, Val Loss = 12.67403
+2025-01-17 09:21:36.776829 Epoch 78, Train Y Loss = 11.70518,  Train X Loss = 0.00000, Val Loss = 12.67579
+2025-01-17 09:23:26.681408 Epoch 79, Train Y Loss = 11.70452,  Train X Loss = 0.00000, Val Loss = 12.67514
+2025-01-17 09:25:16.603410 Epoch 80, Train Y Loss = 11.70387,  Train X Loss = 0.00000, Val Loss = 12.67300
+2025-01-17 09:27:06.520331 Epoch 81, Train Y Loss = 11.70293,  Train X Loss = 0.00000, Val Loss = 12.66933
+2025-01-17 09:28:56.418102 Epoch 82, Train Y Loss = 11.70163,  Train X Loss = 0.00000, Val Loss = 12.67606
+Change mask ratio: 0.0
+2025-01-17 09:30:46.353208 Epoch 83, Train Y Loss = 11.70122,  Train X Loss = 0.00000, Val Loss = 12.67600
+2025-01-17 09:32:36.277884 Epoch 84, Train Y Loss = 11.70121,  Train X Loss = 0.00000, Val Loss = 12.66916
+2025-01-17 09:34:26.196629 Epoch 85, Train Y Loss = 11.69988,  Train X Loss = 0.00000, Val Loss = 12.67040
+2025-01-17 09:36:16.108026 Epoch 86, Train Y Loss = 11.70015,  Train X Loss = 0.00000, Val Loss = 12.66787
+2025-01-17 09:38:06.078231 Epoch 87, Train Y Loss = 11.69954,  Train X Loss = 0.00000, Val Loss = 12.67087
+2025-01-17 09:39:56.003127 Epoch 88, Train Y Loss = 11.69903,  Train X Loss = 0.00000, Val Loss = 12.66910
+2025-01-17 09:41:45.941331 Epoch 89, Train Y Loss = 11.69746,  Train X Loss = 0.00000, Val Loss = 12.66454
+2025-01-17 09:43:35.861704 Epoch 90, Train Y Loss = 11.69637,  Train X Loss = 0.00000, Val Loss = 12.66813
+2025-01-17 09:45:25.888230 Epoch 91, Train Y Loss = 11.69644,  Train X Loss = 0.00000, Val Loss = 12.67150
+2025-01-17 09:47:15.854774 Epoch 92, Train Y Loss = 11.69546,  Train X Loss = 0.00000, Val Loss = 12.67058
+2025-01-17 09:49:05.844530 Epoch 93, Train Y Loss = 11.69514,  Train X Loss = 0.00000, Val Loss = 12.67001
+2025-01-17 09:50:55.890263 Epoch 94, Train Y Loss = 11.69395,  Train X Loss = 0.00000, Val Loss = 12.67111
+2025-01-17 09:52:45.915093 Epoch 95, Train Y Loss = 11.69414,  Train X Loss = 0.00000, Val Loss = 12.66882
+2025-01-17 09:54:35.958646 Epoch 96, Train Y Loss = 11.69308,  Train X Loss = 0.00000, Val Loss = 12.66521
+2025-01-17 09:56:25.967727 Epoch 97, Train Y Loss = 11.69231,  Train X Loss = 0.00000, Val Loss = 12.66927
+Change mask ratio: 0.0
+2025-01-17 09:58:15.922644 Epoch 98, Train Y Loss = 11.69203,  Train X Loss = 0.00000, Val Loss = 12.66656
+2025-01-17 10:00:05.785976 Epoch 99, Train Y Loss = 11.69093,  Train X Loss = 0.00000, Val Loss = 12.67150
+2025-01-17 10:01:55.751564 Epoch 100, Train Y Loss = 11.69119,  Train X Loss = 0.00000, Val Loss = 12.67016
+2025-01-17 10:03:45.461850 Epoch 101, Train Y Loss = 11.69004,  Train X Loss = 0.00000, Val Loss = 12.66767
+2025-01-17 10:05:35.227834 Epoch 102, Train Y Loss = 11.68873,  Train X Loss = 0.00000, Val Loss = 12.67322
+2025-01-17 10:07:24.911744 Epoch 103, Train Y Loss = 11.68843,  Train X Loss = 0.00000, Val Loss = 12.67171
+2025-01-17 10:09:14.538315 Epoch 104, Train Y Loss = 11.68842,  Train X Loss = 0.00000, Val Loss = 12.67035
+2025-01-17 10:11:04.105211 Epoch 105, Train Y Loss = 11.68863,  Train X Loss = 0.00000, Val Loss = 12.66904
+Change mask ratio: 0.0
+2025-01-17 10:12:53.597933 Epoch 106, Train Y Loss = 11.68739,  Train X Loss = 0.00000, Val Loss = 12.67630
+2025-01-17 10:14:43.051459 Epoch 107, Train Y Loss = 11.68718,  Train X Loss = 0.00000, Val Loss = 12.66932
+2025-01-17 10:16:32.536820 Epoch 108, Train Y Loss = 11.68673,  Train X Loss = 0.00000, Val Loss = 12.66942
+2025-01-17 10:18:21.989441 Epoch 109, Train Y Loss = 11.68644,  Train X Loss = 0.00000, Val Loss = 12.67187
+Early stopping at epoch: 109
+Best at epoch 89:
+Train Loss = 11.69746
+Train RMSE = 20.04356, MAE = 12.09696, MAPE = 11.10951
+Val Loss = 12.66454
+Val RMSE = 21.42558, MAE = 13.19125, MAPE = 12.42564
+--------- Test ---------
+All Steps RMSE = 25.04641, MAE = 14.86607, MAPE = 14.98265
+Step 1 RMSE = 18.82990, MAE = 11.95267, MAPE = 12.55530
+Step 2 RMSE = 20.88020, MAE = 12.92976, MAPE = 13.43423
+Step 3 RMSE = 22.32752, MAE = 13.58302, MAPE = 13.97290
+Step 4 RMSE = 23.50679, MAE = 14.11324, MAPE = 14.35863
+Step 5 RMSE = 24.41697, MAE = 14.54847, MAPE = 14.68918
+Step 6 RMSE = 25.18762, MAE = 14.93395, MAPE = 14.98940
+Step 7 RMSE = 25.88292, MAE = 15.29640, MAPE = 15.28690
+Step 8 RMSE = 26.49743, MAE = 15.62683, MAPE = 15.57955
+Step 9 RMSE = 27.03779, MAE = 15.92889, MAPE = 15.84757
+Step 10 RMSE = 27.54628, MAE = 16.21596, MAPE = 16.10379
+Step 11 RMSE = 28.01400, MAE = 16.49344, MAPE = 16.35980
+Step 12 RMSE = 28.44219, MAE = 16.77005, MAPE = 16.61465
+Inference time: 10.89 s

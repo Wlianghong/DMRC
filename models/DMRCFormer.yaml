@@ -1,0 +1,300 @@
+METRLA:
+  num_nodes: 207
+  in_steps: 12
+  out_steps: 12
+
+  train_size: 0.7
+  val_size: 0.1
+
+  time_of_day: True
+  day_of_week: True
+
+  lr: 0.001
+  weight_decay: 0.0003
+  milestones: [25, 35]
+  lr_decay_rate: 0.1
+  batch_size: 16
+  max_epochs: 100
+  early_stop: 30
+  use_cl: False
+  cl_step_size: 2500
+  #clip_grad: 5
+
+  adaptive_mask: True
+  change_mask_ratio: 8
+  ratio_decay: 0.5
+  ratio_threshold: 0.01
+
+  seed: 20241120
+  gpu: [3]
+  save: False
+
+  model_args:
+    num_nodes: 207
+    in_steps: 12
+    out_steps: 12
+    steps_per_day: 288
+    input_dim: 1
+    output_dim: 1
+    input_embedding_dim: 24
+    temporal_embedding_dim: 48
+    spatial_embedding_dim: 0
+    adaptive_embedding_dim: 72
+    add_norm: False
+    mask_ratio: 0.15
+    use_recon: True
+    feed_forward_dim: 256
+    num_heads: 4
+    num_shared_layers: 2
+    num_branch_layers: 1
+    dropout: 0.1
+
+PEMSBAY:
+  num_nodes: 325
+  in_steps: 12
+  out_steps: 12
+
+  train_size: 0.7
+  val_size: 0.1
+
+  time_of_day: True
+  day_of_week: True
+
+  lr: 0.001
+  weight_decay: 0.0001
+  milestones: [15, 35]
+  lr_decay_rate: 0.1
+  batch_size: 16
+  max_epochs: 100
+  early_stop: 30
+  use_cl: False
+
+  adaptive_mask: True
+  change_mask_ratio: 8
+  ratio_decay: 0.5
+  ratio_threshold: 0.01
+
+  seed: 20241120
+  gpu: [1]
+  save: False
+
+  model_args:
+    num_nodes: 325
+    in_steps: 12
+    out_steps: 12
+    steps_per_day: 288
+    input_dim: 1
+    output_dim: 1
+    input_embedding_dim: 24
+    temporal_embedding_dim: 48
+    spatial_embedding_dim: 0
+    adaptive_embedding_dim: 72
+    add_norm: False
+    mask_ratio: 0.15
+    use_recon: True
+    feed_forward_dim: 256
+    num_heads: 4
+    num_shared_layers: 2
+    num_branch_layers: 1
+    dropout: 0.1
+
+PEMS04:
+  num_nodes: 307
+  in_steps: 12
+  out_steps: 12
+
+  train_size: 0.6
+  val_size: 0.2
+
+  time_of_day: True
+  day_of_week: True
+
+  lr: 0.001
+  weight_decay: 0.0005
+  milestones: [20, 35, 55]
+  lr_decay_rate: 0.1
+  batch_size: 16
+  max_epochs: 150
+  early_stop: 30
+  use_cl: False
+  cl_step_size: 2500
+
+  adaptive_mask: True
+  change_mask_ratio: 8
+  ratio_decay: 0.5
+  ratio_threshold: 0.01
+
+  seed: 20241120
+  gpu: [1]
+  save: False
+
+  model_args:
+    num_nodes: 307
+    in_steps: 12
+    out_steps: 12
+    steps_per_day: 288
+    input_dim: 1
+    output_dim: 1
+    input_embedding_dim: 24
+    temporal_embedding_dim: 48
+    spatial_embedding_dim: 0
+    adaptive_embedding_dim: 72
+    add_norm: False
+    mask_ratio: 0.15
+    use_recon: True
+    feed_forward_dim: 256
+    num_heads: 4
+    num_shared_layers: 2
+    num_branch_layers: 1
+    dropout: 0.1
+
+PEMS07:
+  num_nodes: 883
+  in_steps: 12
+  out_steps: 12
+
+  train_size: 0.6
+  val_size: 0.2
+
+  time_of_day: True
+  day_of_week: True
+
+  lr: 0.001
+  weight_decay: 0.001
+  milestones: [20, 40, 55]
+  lr_decay_rate: 0.1
+  batch_size: 16
+  max_epochs: 120
+  early_stop: 25
+  use_cl: False
+  cl_step_size: 2500
+
+  adaptive_mask: True
+  change_mask_ratio: 6
+  ratio_decay: 0.5
+  ratio_threshold: 0.01
+
+  seed: 20241120
+  gpu: [4, 5]
+  save: False
+
+  model_args:
+    num_nodes: 883
+    in_steps: 12
+    out_steps: 12
+    steps_per_day: 288
+    input_dim: 1
+    output_dim: 1
+    input_embedding_dim: 24
+    temporal_embedding_dim: 48
+    spatial_embedding_dim: 0
+    adaptive_embedding_dim: 72
+    add_norm: False
+    mask_ratio: 0.15
+    use_recon: True
+    feed_forward_dim: 256
+    num_heads: 4
+    num_shared_layers: 2
+    num_branch_layers: 1
+    dropout: 0.1
+
+PEMS08:
+  num_nodes: 170
+  in_steps: 12
+  out_steps: 12
+
+  train_size: 0.6
+  val_size: 0.2
+
+  time_of_day: True
+  day_of_week: True
+
+  lr: 0.001
+  weight_decay: 0.0015
+  milestones: [30, 50, 70]
+  lr_decay_rate: 0.1
+  batch_size: 16
+  max_epochs: 150
+  early_stop: 30
+  use_cl: False
+  cl_step_size: 2500
+
+  adaptive_mask: True
+  change_mask_ratio: 8
+  ratio_decay: 0.5
+  ratio_threshold: 0.01
+
+  seed: 20241120
+  gpu: [2]
+  save: False
+
+  model_args:
+    num_nodes: 170
+    in_steps: 12
+    out_steps: 12
+    steps_per_day: 288
+    input_dim: 1
+    output_dim: 1
+    input_embedding_dim: 24
+    temporal_embedding_dim: 48
+    spatial_embedding_dim: 0
+    adaptive_embedding_dim: 72
+    add_norm: False
+    mask_ratio: 0.15
+    use_recon: True
+    feed_forward_dim: 256
+    num_heads: 4
+    num_shared_layers: 2
+    num_branch_layers: 1
+    dropout: 0.1
+
+# This is abandoned, needs further tuning if you want to run
+PEMS03:
+  num_nodes: 358
+  in_steps: 12
+  out_steps: 12
+
+  train_size: 0.6
+  val_size: 0.2
+
+  time_of_day: True
+  day_of_week: True
+
+  lr: 0.001
+  weight_decay: 0.0005
+  milestones: [20, 35, 50]
+  lr_decay_rate: 0.1
+  batch_size: 16
+  max_epochs: 120
+  early_stop: 20
+  use_cl: False
+  cl_step_size: 2500
+
+  adaptive_mask: True
+  change_mask_ratio: 8
+  ratio_decay: 0.5
+  ratio_threshold: 0.01
+
+  seed: 20241120
+  gpu: [3]
+  save: False
+
+  model_args:
+    num_nodes: 358
+    in_steps: 12
+    out_steps: 12
+    steps_per_day: 288
+    input_dim: 1
+    output_dim: 1
+    input_embedding_dim: 24
+    temporal_embedding_dim: 48
+    spatial_embedding_dim: 0
+    adaptive_embedding_dim: 72
+    add_norm: False
+    mask_ratio: 0.15
+    use_recon: True
+    feed_forward_dim: 256
+    num_heads: 4
+    num_shared_layers: 2
+    num_branch_layers: 1
+    dropout: 0.1
